@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <title>Добавить/Редактировать товар</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form">
+            {{ form.as_p }}
+            <button type="submit" class="button">Сохранить</button>
+        </div>
+    </form>
+</body>
+</html>

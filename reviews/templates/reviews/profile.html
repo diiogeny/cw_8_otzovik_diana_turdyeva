@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Добро пожаловать, {{ user.username }}!</h1>
+    <p>Email: {{ user.email }}</p>
+    <p>Имя: {{ user.first_name }}</p>
+    <p>Фамилия: {{ user.last_name }}</p>
+    <h2>Ваши отзывы:</h2>
+    <ul>
+        {% for review in reviews %}
+        <li>
+            <a href="{% url 'review_list' review.product.id %}">{{ review.product.name }}</a>: {{ review.text }}
+        </li>
+        {% empty %}
+        <p>Вы ещё не оставляли отзывов.</p>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'password_change' %}">Сменить пароль</a>
+    <a href="{% url 'logout' %}">Выйти</a>
+</body>
+</html>

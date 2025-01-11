@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    {% load star_rating %}
+    <title>Отзывы на {{ product.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Отзывы на {{ product.name }}</h1>
+    <p>Средняя оценка: {{ average_rating|star_rating }}</p>
+
+    <ul>
+        {% for review in reviews %}
+        <li>
+            <p><strong><a href="{% url 'profile' review.author.id %}">{{ review.author.username }}</a></strong></p>
+            <p>Оценка: {{ review.rating|star_rating }}</p>
+            <p>{{ review.text }}</p>
+            {% if review.author == request.user %}
+                <a href="{% url 'review_edit' review.pk %}">Редактировать</a>
+                <a href="{% url 'review_delete' review.pk %}">Удалить</a>
+            {% endif %}
+        </li>
+        {% empty %}
+        <p>Отзывов пока нет. Будьте первым, кто оставит отзыв!</p>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'review_create' product.id %}">Добавить отзыв</a>
+    <br>
+    <a href="{% url 'product_list' %}">Вернуться к списку товаров</a>
+</body>
+</html>

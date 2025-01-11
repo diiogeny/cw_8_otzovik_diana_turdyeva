@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <title>{{ product.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>{{ product.name }}</h1>
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" onerror="this.src='/static/images/placeholder.png';" />
+    <p>{{ product.description }}</p>
+    <p>Цена: {{ product.price }}</p>
+    <p>Категория: {{ product.category }}</p>
+    <p>Бренд: {{ product.brand }}</p>
+    <p>Средняя оценка: {{ average_rating|star_rating }}</p>
+
+    <a href="{% url 'review_list' product.id %}">Посмотреть отзывы</a>
+    <a href="{% url 'product_edit' product.id %}">Редактировать</a>
+    <a href="{% url 'product_delete' product.id %}">Удалить</a>
+</body>
+</html>

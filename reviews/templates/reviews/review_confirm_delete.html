@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <title>Удаление отзыва</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Вы уверены, что хотите удалить этот отзыв?</h1>
+
+    <p><strong>Товар:</strong> {{ review.product.name }}</p>
+    <p><strong>Автор:</strong> {{ review.author.username }}</p>
+    <p><strong>Текст:</strong> {{ review.text }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Удалить</button>
+        <a href="{% url 'review_list' review.product.id %}">Отмена</a>
+    </form>
+</body>
+</html>

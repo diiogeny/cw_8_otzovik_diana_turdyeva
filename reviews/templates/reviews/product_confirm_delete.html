@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <title>Удаление товара</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="card">
+        <h1>Вы уверены, что хотите удалить "{{ product.name }}"?</h1>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="button">Удалить</button>
+            <a href="{% url 'product_list' %}" class="button">Отмена</a>
+        </form>
+    </div>
+</body>
+</html>
